@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>Story Generator</title>
+    <style>
+        /* Add some CSS to style the page */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #generate-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+            #generate-button:hover {
+                background-color: #3e8e41;
+            }
+
+        #story {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #bbb;
+            text-align: left;
+        }
+
+        #image {
+            width: 100%;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        .input-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .input-field {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <button id="generate-button" onclick="generateStory()">Generate</button>
+    </div>
+    <div id="story-container">
+        <p id="story"></p>
+        <img id="image" src="" alt="Generated Image">
+    </div>
+    <script>
+        async function generateStory() {
+            // Send a GET request to the /generate-story endpoint
+            let response = await fetch(`/generate-story`);
+            // Convert the response to JSON
+            let data = await response.json();
+            // Update the story and image elements with the generated content
+            document.getElementById("story").innerHTML = data.story;
+            document.getElementById("image").src = data.image;
+            document.getElementById("image").style.display = "block";
+        }
+    </script>
+</body>
+</html>
